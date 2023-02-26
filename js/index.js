@@ -1,9 +1,17 @@
-
 function lodeImage(inputText) {
+    document.getElementById('spinner').classList.remove('d-none');
+
+
+
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputText}`
     fetch(url)
         .then(res => res.json())
-        .then(json => imageFile(json.meals))
+        .then(json => {
+            document.getElementById('spinner').classList.add('d-none');
+            document.getElementById('input-fild').value = '';
+            imageFile(json.meals)
+        })
+        
 
 }
 
@@ -32,6 +40,14 @@ const serch = () => {
 
     lodeImage(inputFild);
 }
+
+
+document.getElementById('secend-btn').addEventListener('click', function(){
+    const secendValue = document.getElementById('secend-value').value;
+    console.log(secendValue);
+    lodeImage(secendValue);
+})
+
 lodeImage('')
 
 const lodeMeale = (id) => {
